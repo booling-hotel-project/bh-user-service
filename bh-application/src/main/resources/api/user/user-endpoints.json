@@ -1,0 +1,58 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "User API",
+    "version": "1.0.0",
+    "description": "User API реализует бизнес функции необходимые для управления пользователями, профилями, ролями и т.д.",
+    "contact": {
+      "email": "dsafoev40@gmail.com"
+    }
+  },
+  "tags": [
+    {
+      "name": "User",
+      "description": "Операции с пользователями"
+    }
+  ],
+  "paths": {
+    "/v1/user/auth/login": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Авторизация существующего пользователя",
+        "description": "Команда служит для авторизации пользователя в системе бронирования отелей",
+        "operationId": "loginUser",
+        "requestBody": {
+          "description": "Атрибуты при авторизации пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "user-request-models.json#/components/schemas/LoginUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная авторизация",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "user-response-models.json#/components/schemas/LoginUserResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Ошибка валидации"
+          },
+          "401": {
+            "description": "Неверный логин или пароль"
+          }
+        }
+      }
+    }
+  }
+}

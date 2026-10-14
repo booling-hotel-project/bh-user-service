@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bh-user-service
+    username: postgres
+    password: 233122
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: none
+    mapping-resources:
+      - hbm/user-hbm.xml
+      - hbm/role-hbm.xml
+      - hbm/user-role-hbm.xml
+      - hbm/guest-profile-hbm.xml
+      - hbm/staff-profile-hbm.xml
+      - hbm/refresh-token-hbm.xml

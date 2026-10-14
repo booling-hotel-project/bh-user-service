@@ -1,4 +1,4 @@
-package bh.user.domain.user;
+package ru.booking.hotel.domain.user;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;

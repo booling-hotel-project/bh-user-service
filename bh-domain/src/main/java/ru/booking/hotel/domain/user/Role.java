@@ -1,9 +1,8 @@
-package bh.user.domain.user;
+package ru.booking.hotel.domain.user;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -11,11 +10,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class StaffProfile {
+public class Role {
 
-    UUID userId;
-    String department;
-    String position;
-    Date hireDate;
+    UUID id;
+    String name;
+    String description;
 
 }

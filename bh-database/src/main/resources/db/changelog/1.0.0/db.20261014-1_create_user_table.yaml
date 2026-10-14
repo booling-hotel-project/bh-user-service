@@ -29,6 +29,11 @@ databaseChangeLog:
                   name: name
                   type: varchar(255)
               - column:
-                  name: created_at
-                  type: timestamp with time zone
-                  defaultValueComputed: now()
+                   name: created_at
+                   type: timestamp with time zone
+                   defaultValueComputed: now()
+
+        - addUniqueConstraint:
+            tableName: users
+            columnNames: email
+            constraintName: uq_users_email

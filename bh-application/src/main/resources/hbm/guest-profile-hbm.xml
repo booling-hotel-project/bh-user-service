@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="ru.booking.hotel.domain.user">
+
+    <class name="GuestProfile" table="guest_profiles">
+        <id name="userId" column="user_id" type="java.util.UUID">
+            <generator class="assigned"/>
+        </id>
+
+        <property name="passport"     column="passport"/>
+        <property name="loyaltyLevel" column="loyalty_level"/>
+        <property name="preferences"  column="preferences"/>
+    </class>
+
+</hibernate-mapping>

@@ -71,6 +71,10 @@
             <artifactId>jackson-databind</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.openapitools</groupId>
+            <artifactId>jackson-databind-nullable</artifactId>
+        </dependency>
+        <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
             <scope>provided</scope>
@@ -121,10 +125,6 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
             </plugin>
-            <!-- Генерация API из спеки как в легаси: положи openapi-json
-                 в src/main/resources/api/<домен>/<домен>-api.json и добавь
-                 execution по образцу ниже, подставив свои пакеты -->
-            <!--
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
@@ -140,7 +140,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/api/user/user-api.json</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/api/user/user-endpoints.json</inputSpec>
                             <generatorName>spring</generatorName>
                             <apiPackage>ru.booking.hotel.application.api.user.api</apiPackage>
                             <modelPackage>ru.booking.hotel.application.api.user.model</modelPackage>
@@ -154,7 +154,6 @@
                     </execution>
                 </executions>
             </plugin>
-            -->
         </plugins>
     </build>
 

@@ -1,7 +1,7 @@
 databaseChangeLog:
   - changeSet:
       id: 20261014-5_create_staff_profile_table
-      author: your.name
+      author: Safoev.DZ
       changes:
         - createTable:
             tableName: staff_profiles

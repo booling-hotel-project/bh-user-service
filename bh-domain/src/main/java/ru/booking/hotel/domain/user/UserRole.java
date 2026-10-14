@@ -1,9 +1,8 @@
-package bh.user.domain.user;
+package ru.booking.hotel.domain.user;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Getter
@@ -11,11 +10,10 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class RefreshToken {
+public class UserRole {
 
     UUID id;
     UUID userId;
-    String tokenHash;
-    OffsetDateTime expiredAt;
+    UUID roleId;
 
 }

@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261014-4_create_guest_profile_table
+      author: your.name
+      changes:
+        - createTable:
+            tableName: guest_profiles
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: passport
+                  type: varchar(50)
+              - column:
+                  name: loyalty_level
+                  type: varchar(20)
+              - column:
+                  name: preferences
+                  type: jsonb
+
+        - addForeignKeyConstraint:
+            constraintName: fk_guest_profiles_user
+            baseTableName: guest_profiles
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: CASCADE

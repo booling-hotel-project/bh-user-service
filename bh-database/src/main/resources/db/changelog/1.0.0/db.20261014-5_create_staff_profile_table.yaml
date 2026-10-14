@@ -1,0 +1,31 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261014-5_create_staff_profile_table
+      author: your.name
+      changes:
+        - createTable:
+            tableName: staff_profiles
+            columns:
+              - column:
+                  name: user_id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: department
+                  type: varchar(255)
+              - column:
+                  name: position
+                  type: varchar(255)
+              - column:
+                  name: hire_date
+                  type: date
+
+        - addForeignKeyConstraint:
+            constraintName: fk_staff_profiles_user
+            baseTableName: staff_profiles
+            baseColumnNames: user_id
+            referencedTableName: users
+            referencedColumnNames: id
+            onDelete: CASCADE

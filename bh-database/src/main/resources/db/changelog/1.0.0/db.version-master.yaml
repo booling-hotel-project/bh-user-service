@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261014-1_create_user_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261014-2_create_role_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261014-3_create_user_role_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261014-4_create_guest_profile_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261014-5_create_staff_profile_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261014-6_create_refresh_token_table.yaml

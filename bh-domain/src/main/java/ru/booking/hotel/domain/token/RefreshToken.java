@@ -1,19 +1,22 @@
-package ru.booking.hotel.domain.user;
+package ru.booking.hotel.domain.token;
+
+import java.time.OffsetDateTime;
+import java.util.UUID;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserRole {
+@Builder
+public class RefreshToken {
 
     UUID id;
     UUID userId;
-    UUID roleId;
+    String tokenHash;
+    OffsetDateTime expiresAt;
 
 }

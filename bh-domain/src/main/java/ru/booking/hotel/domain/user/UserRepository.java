@@ -1,16 +1,18 @@
 package ru.booking.hotel.domain.user;
 
-import jakarta.persistence.EntityManager;
-import lombok.AccessLevel;
-import lombok.RequiredArgsConstructor;
-import lombok.experimental.FieldDefaults;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import ru.booking.hotel.domain.user.query.UserRowMapper;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
+
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+
+import ru.booking.hotel.domain.user.query.UserRowMapper;
+
+import jakarta.persistence.EntityManager;
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -19,7 +21,7 @@ public class UserRepository {
     EntityManager entityManager;
     NamedParameterJdbcTemplate jdbcTemplate;
 
-    public User save(User user) {
+    public User saveUser(User user) {
         entityManager.persist(user);
         return user;
     }

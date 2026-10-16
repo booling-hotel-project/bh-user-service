@@ -1,19 +1,20 @@
-package ru.booking.hotel.domain.user;
+package ru.booking.hotel.domain.role;
+
+import java.util.UUID;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.UUID;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class Role {
+@Builder
+public class UserRole {
 
     UUID id;
-    String name;
-    String description;
+    UUID userId;
+    UUID roleId;
 
 }

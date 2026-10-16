@@ -1,0 +1,54 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261016-1_insert_roles_table
+      author: Safoev.DZ
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: "550e8400-e29b-41d4-a716-446655440001"
+              - column:
+                  name: name
+                  value: "MANAGER"
+              - column:
+                  name: description
+                  value: "Менеджер"
+
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: "550e8400-e29b-41d4-a716-446655440002"
+              - column:
+                  name: name
+                  value: "USER"
+              - column:
+                  name: description
+                  value: "Обычный пользователь"
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: "550e8400-e29b-41d4-a716-446655440003"
+              - column:
+                  name: name
+                  value: "HOUSEKEEPING"
+              - column:
+                  name: description
+                  value: "Персонал уборки (горничные)"
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: "550e8400-e29b-41d4-a716-446655440004"
+              - column:
+                  name: name
+                  value: "MAINTENANCE"
+              - column:
+                  name: description
+                  value: "Персонал обслуживания (ремонт)"

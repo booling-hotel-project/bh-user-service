@@ -3,9 +3,9 @@
         "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
-<hibernate-mapping package="ru.booking.hotel.domain.user">
+<hibernate-mapping package="ru.booking.hotel.domain.role">
 
-    <class name="UserRole" table="user_roles">
+    <class name="ru.booking.hotel.domain.role.UserRole" table="user_roles">
         <id name="id" column="id" type="java.util.UUID">
             <generator class="org.hibernate.id.UUIDGenerator"/>
         </id>

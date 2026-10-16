@@ -19,6 +19,9 @@
         <guava.version>33.5.0-jre</guava.version>
         <postgresql.version>42.7.8</postgresql.version>
         <openapi.generator.version>7.21.0</openapi.generator.version>
+        <spotless.version>2.43.0</spotless.version>
+        <palantir.java.format.version>2.39.0</palantir.java.format.version>
+        <hypersistence.version>3.11.0</hypersistence.version>
         <jjwt.version>0.13.0</jjwt.version>
         <jackson.databind.nullable.version>0.2.2</jackson.databind.nullable.version>
         <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
@@ -122,6 +125,11 @@
                 <artifactId>jjwt-jackson</artifactId>
                 <version>${jjwt.version}</version>
             </dependency>
+            <dependency>
+                <groupId>io.hypersistence</groupId>
+                <artifactId>hypersistence-utils-hibernate-63</artifactId>
+                <version>${hypersistence.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -138,9 +146,33 @@
                     <artifactId>openapi-generator-maven-plugin</artifactId>
                     <version>${openapi.generator.version}</version>
                 </plugin>
+                <plugin>
+                    <groupId>com.diffplug.spotless</groupId>
+                    <artifactId>spotless-maven-plugin</artifactId>
+                    <version>${spotless.version}</version>
+                    <configuration>
+                        <java>
+                            <!-- Полное форматирование (palantir) включить при появлении сети:
+                            <palantirJavaFormat>
+                                <version>${palantir.java.format.version}</version>
+                            </palantirJavaFormat>
+                            -->
+                            <importOrder>
+                                <order>java,javax,org,com,ru,\#</order>
+                            </importOrder>
+                            <!-- removeUnusedImports тоже тянет google-java-format, вернуть вместе с palantir -->
+                            <trimTrailingWhitespace/>
+                            <endWithNewline/>
+                        </java>
+                    </configuration>
+                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
+            <plugin>
+                <groupId>com.diffplug.spotless</groupId>
+                <artifactId>spotless-maven-plugin</artifactId>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>

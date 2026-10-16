@@ -1,12 +1,13 @@
 package ru.booking.hotel.domain.user.query;
 
-import org.springframework.jdbc.core.RowMapper;
-import ru.booking.hotel.domain.user.User;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.UUID;
+
+import org.springframework.jdbc.core.RowMapper;
+
+import ru.booking.hotel.domain.user.User;
 
 public class UserRowMapper implements RowMapper<User> {
 

@@ -1,10 +1,10 @@
 package ru.booking.hotel.domain.user;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.time.OffsetDateTime;
 import java.util.UUID;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
@@ -19,6 +19,6 @@ public class User {
     String phone;
     String passwordHash;
     String name;
-    OffsetDateTime createdAt = OffsetDateTime.now();
+    OffsetDateTime createdAt;
 
 }

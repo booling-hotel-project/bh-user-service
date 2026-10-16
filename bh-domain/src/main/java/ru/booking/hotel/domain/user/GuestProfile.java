@@ -1,9 +1,11 @@
 package ru.booking.hotel.domain.user;
 
+import java.util.UUID;
+
+import com.fasterxml.jackson.databind.JsonNode;
+
 import lombok.*;
 import lombok.experimental.FieldDefaults;
-
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,6 +17,6 @@ public class GuestProfile {
     UUID userId;
     String passport;
     String loyaltyLevel;
-    String preferences;
+    JsonNode preferences;
 
 }

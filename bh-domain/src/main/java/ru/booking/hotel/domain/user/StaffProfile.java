@@ -1,10 +1,10 @@
 package ru.booking.hotel.domain.user;
 
-import lombok.*;
-import lombok.experimental.FieldDefaults;
-
 import java.time.LocalDate;
 import java.util.UUID;
+
+import lombok.*;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter

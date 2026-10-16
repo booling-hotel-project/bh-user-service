@@ -17,3 +17,6 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: db.20261014-6_create_refresh_token_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261016-1_insert_roles_table.yaml

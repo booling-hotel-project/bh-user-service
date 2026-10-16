@@ -1,15 +1,17 @@
 package ru.booking.hotel.application.service.user;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Date;
 import java.util.UUID;
+
+import javax.crypto.SecretKey;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 
 @Service
 public class JwtService {
@@ -37,6 +39,10 @@ public class JwtService {
 
     public long getAccessTtlSeconds() {
         return accessTtlSeconds;
+    }
+
+    public long getRefreshTtlSeconds() {
+        return refreshTtlSeconds;
     }
 
     private String buildToken(UUID userId, long ttlSeconds) {

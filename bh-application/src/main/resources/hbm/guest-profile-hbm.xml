@@ -10,9 +10,9 @@
             <generator class="assigned"/>
         </id>
 
-        <property name="passport"     column="passport"/>
-        <property name="loyaltyLevel" column="loyalty_level"/>
-        <property name="preferences"  column="preferences"/>
+        <property name="passport"     column="passport" type="java.lang.String"/>
+        <property name="loyaltyLevel" column="loyalty_level" type="java.lang.String"/>
+        <property name="preferences"  column="preferences" type="io.hypersistence.utils.hibernate.type.json.JsonNodeBinaryType"/>
     </class>
 
 </hibernate-mapping>

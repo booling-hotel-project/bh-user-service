@@ -1,8 +1,9 @@
 package ru.booking.hotel.domain.user.exception;
 
-import lombok.Builder;
 import ru.booking.hotel.domain.error.AbstractErrorReason;
 import ru.booking.hotel.domain.error.ErrorReason;
+
+import lombok.Builder;
 
 public abstract class UserErrorReason extends AbstractErrorReason implements ErrorReason {
 

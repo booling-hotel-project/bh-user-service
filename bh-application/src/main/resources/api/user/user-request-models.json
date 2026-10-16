@@ -34,6 +34,29 @@
         "required": [
           "password"
         ]
+      },
+      "RegisterUserRequest": {
+        "type": "object",
+        "description": "Команда регистрации пользователя: email + телефон + пароль",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email пользователя"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Телефон пользователя"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Пароль пользователя"
+          }
+        },
+        "required": [
+          "password","email","phone"
+        ]
       }
     }
   }

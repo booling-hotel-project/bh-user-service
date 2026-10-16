@@ -46,10 +46,43 @@
             }
           },
           "400": {
-            "description": "Ошибка валидации"
+            "$ref": "../common/common-contract.json#/components/responses/ValidationErrorResponse"
           },
           "401": {
-            "description": "Неверный логин или пароль"
+            "$ref": "../common/common-contract.json#/components/responses/UnauthorizedErrorResponse"
+          }
+        }
+      }
+    },
+    "/v1/user/auth/register": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Регистрация нового пользователя",
+        "description": "Команда служит для регистрации пользователя в системе бронирования отелей",
+        "operationId": "registerUser",
+        "requestBody": {
+          "description": "Атрибуты при регистрации пользователя",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "user-request-models.json#/components/schemas/RegisterUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Успешная регистрация",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "user-response-models.json#/components/schemas/RegisterUserResponse"
+                }
+              }
+            }
           }
         }
       }

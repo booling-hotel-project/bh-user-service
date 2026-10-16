@@ -1,0 +1,108 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Общий контракт API",
+    "version": "1.0.0",
+    "description": "Общие типы и ответы об ошибках для всех API"
+  },
+  "paths": {
+  },
+  "components": {
+    "schemas": {
+      "ApiError": {
+        "type": "object",
+        "description": "Базовая модель ошибки",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Код ошибки, например INVALID_CREDENTIALS"
+          },
+          "message": {
+            "type": "string",
+            "description": "Человекочитаемое описание ошибки"
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      },
+      "FieldViolation": {
+        "type": "object",
+        "description": "Одно нарушение валидации",
+        "properties": {
+          "field": {
+            "type": "string",
+            "description": "Имя поля, не прошедшего валидацию"
+          },
+          "message": {
+            "type": "string",
+            "description": "Описание нарушения"
+          }
+        },
+        "required": [
+          "field",
+          "message"
+        ]
+      },
+      "ValidationError": {
+        "type": "object",
+        "description": "Ошибка валидации запроса",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Код ошибки",
+            "example": "VALIDATION_FAILED"
+          },
+          "message": {
+            "type": "string",
+            "description": "Общее описание ошибки"
+          },
+          "violations": {
+            "type": "array",
+            "description": "Список нарушений по полям",
+            "items": {
+              "$ref": "#/components/schemas/FieldViolation"
+            }
+          }
+        },
+        "required": [
+          "code",
+          "message"
+        ]
+      }
+    },
+    "responses": {
+      "ValidationErrorResponse": {
+        "description": "Ошибка валидации запроса",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "UnauthorizedErrorResponse": {
+        "description": "Неверный логин или пароль",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      },
+      "NotFoundErrorResponse": {
+        "description": "Ресурс не найден",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
+      }
+    }
+  }
+}

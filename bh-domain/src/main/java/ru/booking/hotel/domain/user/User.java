@@ -11,6 +11,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
+@Builder
 public class User {
 
     UUID id;
@@ -18,6 +19,6 @@ public class User {
     String phone;
     String passwordHash;
     String name;
-    OffsetDateTime createdAt;
+    OffsetDateTime createdAt = OffsetDateTime.now();
 
 }

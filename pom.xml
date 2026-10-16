@@ -19,6 +19,7 @@
         <guava.version>33.5.0-jre</guava.version>
         <postgresql.version>42.7.8</postgresql.version>
         <openapi.generator.version>7.21.0</openapi.generator.version>
+        <jjwt.version>0.13.0</jjwt.version>
         <jackson.databind.nullable.version>0.2.2</jackson.databind.nullable.version>
         <jakarta.servlet.version>6.0.0</jakarta.servlet.version>
         <spring.jdbc.version>7.0.2</spring.jdbc.version>
@@ -105,6 +106,21 @@
                 <groupId>org.openapitools</groupId>
                 <artifactId>jackson-databind-nullable</artifactId>
                 <version>${jackson.databind.nullable.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jjwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jjwt.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

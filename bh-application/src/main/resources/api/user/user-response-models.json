@@ -45,6 +45,40 @@
           "accessToken",
           "refreshToken"
         ]
+      },
+      "RegisterUserResponse": {
+        "type": "object",
+        "description": "Результат успешной регистрации",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор пользователя"
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "Токен доступа"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "Токен обновления"
+          },
+          "tokenType": {
+            "type": "string",
+            "description": "Тип токена",
+            "example": "Bearer"
+          },
+          "expiresIn": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Время жизни токена доступа в секундах"
+          }
+        },
+        "required": [
+          "userId",
+          "accessToken",
+          "refreshToken"
+        ]
       }
     }
   }

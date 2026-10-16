@@ -1,21 +1,18 @@
 package ru.booking.hotel.application.service.user;
 
-import java.io.InvalidObjectException;
-import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.google.common.hash.Hashing;
 
 import ru.booking.hotel.application.api.user.model.LoginUserRequest;
 import ru.booking.hotel.application.api.user.model.LoginUserResponse;
 import ru.booking.hotel.application.api.user.model.RegisterUserRequest;
 import ru.booking.hotel.application.api.user.model.RegisterUserResponse;
 import ru.booking.hotel.application.infrastructure.mapping.UserMapper;
+import ru.booking.hotel.application.infrastructure.security.TokenHasher;
 import ru.booking.hotel.domain.error.BusinessException;
 import ru.booking.hotel.domain.error.NotFoundException;
 import ru.booking.hotel.domain.error.UnauthorizedException;
@@ -27,7 +24,10 @@ import ru.booking.hotel.domain.role.UserRoles;
 import ru.booking.hotel.domain.role.exception.RoleErrorReason;
 import ru.booking.hotel.domain.token.RefreshToken;
 import ru.booking.hotel.domain.token.RefreshTokenRepository;
-import ru.booking.hotel.domain.user.*;
+import ru.booking.hotel.domain.user.GuestProfile;
+import ru.booking.hotel.domain.user.GuestProfileRepository;
+import ru.booking.hotel.domain.user.User;
+import ru.booking.hotel.domain.user.UserRepository;
 import ru.booking.hotel.domain.user.exception.UserErrorReason;
 
 import lombok.AccessLevel;
@@ -42,9 +42,11 @@ import lombok.extern.slf4j.Slf4j;
 public class UserApplicationService {
 
     UserRepository userRepository;
+    GuestProfileRepository guestProfileRepository;
     RefreshTokenRepository refreshTokenRepository;
     PasswordEncoder passwordEncoder;
     JwtService jwtService;
+    TokenHasher tokenHasher;
     UserMapper userMapper;
     UserRoleRepository userRoleRepository;
     RoleRepository roleRepository;
@@ -65,15 +67,7 @@ public class UserApplicationService {
 
         }
 
-        String rawRefreshToken = jwtService.generateRefreshToken(user.getId());
-        var refreshToken = RefreshToken.builder()
-                .userId(user.getId())
-                .tokenHash(Hashing.sha256().hashString(rawRefreshToken, StandardCharsets.UTF_8).toString())
-                .expiresAt(OffsetDateTime.now().plusSeconds(jwtService.getRefreshTtlSeconds()))
-                .build();
-
-        refreshTokenRepository.deleteByUserId(user.getId());
-        refreshTokenRepository.save(refreshToken);
+        String rawRefreshToken = issueRefreshToken(user.getId());
 
         log.info("Пользователь с email={} , успешно зашел в систему", loginUserRequest.getEmail());
 
@@ -114,16 +108,9 @@ public class UserApplicationService {
 
         GuestProfile profile = new GuestProfile();
         profile.setUserId(user.getId());
-        userRepository.saveGuestProfile(profile);
+        guestProfileRepository.save(profile);
 
-        String rawRefreshToken = jwtService.generateRefreshToken(user.getId());
-        var refreshToken = RefreshToken.builder()
-                .userId(user.getId())
-                .tokenHash(Hashing.sha256().hashString(rawRefreshToken, StandardCharsets.UTF_8).toString())
-                .expiresAt(OffsetDateTime.now().plusSeconds(jwtService.getRefreshTtlSeconds()))
-                .build();
-
-        refreshTokenRepository.save(refreshToken);
+        String rawRefreshToken = issueRefreshToken(user.getId());
 
         log.info("Пользователь с email={}, успешно зарегистрировался", registerUserRequest.getEmail());
 
@@ -133,5 +120,18 @@ public class UserApplicationService {
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
+    }
+
+    private String issueRefreshToken(UUID userId) {
+        String rawRefreshToken = jwtService.generateRefreshToken(userId);
+        var refreshToken = RefreshToken.builder()
+                .userId(userId)
+                .tokenHash(tokenHasher.sha256Hex(rawRefreshToken))
+                .expiresAt(OffsetDateTime.now().plusSeconds(jwtService.getRefreshTtlSeconds()))
+                .build();
+
+        refreshTokenRepository.deleteByUserId(userId);
+        refreshTokenRepository.save(refreshToken);
+        return rawRefreshToken;
     }
 }

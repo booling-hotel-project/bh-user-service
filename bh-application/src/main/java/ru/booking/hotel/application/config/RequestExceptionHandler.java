@@ -1,11 +1,13 @@
 package ru.booking.hotel.application.config;
 
-import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+
 import ru.booking.hotel.application.api.user.model.ApiError;
 import ru.booking.hotel.application.api.user.model.FieldViolation;
 import ru.booking.hotel.application.api.user.model.ValidationError;
@@ -13,7 +15,7 @@ import ru.booking.hotel.domain.error.BusinessException;
 import ru.booking.hotel.domain.error.NotFoundException;
 import ru.booking.hotel.domain.error.UnauthorizedException;
 
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestControllerAdvice

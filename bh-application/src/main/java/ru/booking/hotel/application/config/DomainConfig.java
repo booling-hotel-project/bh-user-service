@@ -9,6 +9,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import ru.booking.hotel.domain.role.RoleRepository;
 import ru.booking.hotel.domain.role.UserRoleRepository;
 import ru.booking.hotel.domain.token.RefreshTokenRepository;
+import ru.booking.hotel.domain.user.GuestProfileRepository;
 import ru.booking.hotel.domain.user.UserRepository;
 
 import jakarta.persistence.EntityManager;
@@ -19,6 +20,11 @@ public class DomainConfig {
     @Bean
     public UserRepository userRepository(EntityManager entityManager, NamedParameterJdbcTemplate jdbcTemplate) {
         return new UserRepository(entityManager, jdbcTemplate);
+    }
+
+    @Bean
+    public GuestProfileRepository guestProfileRepository(EntityManager entityManager) {
+        return new GuestProfileRepository(entityManager);
     }
 
     @Bean

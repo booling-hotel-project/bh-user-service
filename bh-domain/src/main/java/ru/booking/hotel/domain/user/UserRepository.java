@@ -26,11 +26,6 @@ public class UserRepository {
         return user;
     }
 
-    public GuestProfile saveGuestProfile(GuestProfile profile) {
-        entityManager.persist(profile);
-        return profile;
-    }
-
     public Optional<User> findById(UUID id) {
         List<User> users = jdbcTemplate.query(
                 "SELECT id, email, phone, password_hash, name, created_at FROM users WHERE id = :id",

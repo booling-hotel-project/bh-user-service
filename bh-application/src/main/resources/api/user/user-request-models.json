@@ -28,7 +28,8 @@
           "password": {
             "type": "string",
             "format": "password",
-            "description": "Пароль пользователя"
+            "description": "Пароль пользователя",
+            "minLength": 8
           }
         },
         "required": [
@@ -51,7 +52,8 @@
           "password": {
             "type": "string",
             "format": "password",
-            "description": "Пароль пользователя"
+            "description": "Пароль пользователя, минимум 8 символов",
+            "minLength": 8
           }
         },
         "required": [

@@ -1,8 +1,10 @@
 package ru.booking.hotel.application.service.user;
 
+import java.io.InvalidObjectException;
 import java.nio.charset.StandardCharsets;
 import java.time.OffsetDateTime;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,12 +65,22 @@ public class UserApplicationService {
 
         }
 
+        String rawRefreshToken = jwtService.generateRefreshToken(user.getId());
+        var refreshToken = RefreshToken.builder()
+                .userId(user.getId())
+                .tokenHash(Hashing.sha256().hashString(rawRefreshToken, StandardCharsets.UTF_8).toString())
+                .expiresAt(OffsetDateTime.now().plusSeconds(jwtService.getRefreshTtlSeconds()))
+                .build();
+
+        refreshTokenRepository.deleteByUserId(user.getId());
+        refreshTokenRepository.save(refreshToken);
+
         log.info("Пользователь с email={} , успешно зашел в систему", loginUserRequest.getEmail());
 
         return new LoginUserResponse()
                 .userId(user.getId())
                 .accessToken(jwtService.generateAccessToken(user.getId()))
-                .refreshToken(jwtService.generateRefreshToken(user.getId()))
+                .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
     }

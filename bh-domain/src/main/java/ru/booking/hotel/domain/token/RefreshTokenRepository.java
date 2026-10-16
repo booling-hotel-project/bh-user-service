@@ -5,6 +5,8 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class RefreshTokenRepository {
@@ -14,5 +16,11 @@ public class RefreshTokenRepository {
     public RefreshToken save(RefreshToken refreshToken) {
         entityManager.persist(refreshToken);
         return refreshToken;
+    }
+
+    public void deleteByUserId(UUID userId) {
+        entityManager.createQuery("DELETE FROM RefreshToken t WHERE t.userId = :userId")
+                .setParameter("userId", userId)
+                .executeUpdate();
     }
 }

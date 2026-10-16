@@ -102,6 +102,16 @@
             }
           }
         }
+      },
+      "ConflictErrorResponse": {
+        "description": "Конфликт бизнес-логики, например дубль при регистрации",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/ApiError"
+            }
+          }
+        }
       }
     }
   }

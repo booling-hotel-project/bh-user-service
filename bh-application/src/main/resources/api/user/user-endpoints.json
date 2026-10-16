@@ -50,6 +50,9 @@
           },
           "401": {
             "$ref": "../common/common-contract.json#/components/responses/UnauthorizedErrorResponse"
+          },
+          "404": {
+            "$ref": "../common/common-contract.json#/components/responses/NotFoundErrorResponse"
           }
         }
       }
@@ -83,6 +86,15 @@
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "../common/common-contract.json#/components/responses/ValidationErrorResponse"
+          },
+          "404": {
+            "$ref": "../common/common-contract.json#/components/responses/NotFoundErrorResponse"
+          },
+          "409": {
+            "$ref": "../common/common-contract.json#/components/responses/ConflictErrorResponse"
           }
         }
       }

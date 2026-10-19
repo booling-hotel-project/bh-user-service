@@ -45,8 +45,9 @@ public class DomainConfig {
     }
 
     @Bean
-    public UserRoleRepository userRoleRepository(EntityManager entityManager) {
-        return new UserRoleRepository(entityManager);
+    public UserRoleRepository userRoleRepository(
+            EntityManager entityManager, NamedParameterJdbcTemplate jdbcTemplate) {
+        return new UserRoleRepository(entityManager, jdbcTemplate);
     }
 
     @Bean

@@ -1,6 +1,7 @@
 package ru.booking.hotel.application.service.user;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -77,11 +78,13 @@ public class UserApplicationService {
 
         String rawRefreshToken = issueRefreshToken(user.getId());
 
+        List<String> roles = userRoleRepository.findRoleNamesByUserId(user.getId());
+
         log.info("Пользователь с email={} , успешно зашел в систему", loginUserRequest.getEmail());
 
         return new LoginUserResponse()
                 .userId(user.getId())
-                .accessToken(jwtService.generateAccessToken(user.getId()))
+                .accessToken(jwtService.generateAccessToken(user.getId(), roles))
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
@@ -104,11 +107,13 @@ public class UserApplicationService {
 
         String rawRefreshToken = issueRefreshToken(stored.getUserId());
 
+        List<String> roles = userRoleRepository.findRoleNamesByUserId(stored.getUserId());
+
         log.info("Пара токенов обновлена для пользователя userId={}", stored.getUserId());
 
         return new RefreshTokenResponse()
                 .userId(stored.getUserId())
-                .accessToken(jwtService.generateAccessToken(stored.getUserId()))
+                .accessToken(jwtService.generateAccessToken(stored.getUserId(), roles))
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
@@ -151,7 +156,7 @@ public class UserApplicationService {
 
         return new RegisterUserResponse()
                 .userId(user.getId())
-                .accessToken(jwtService.generateAccessToken(user.getId()))
+                .accessToken(jwtService.generateAccessToken(user.getId(), List.of(userRole.getName())))
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());

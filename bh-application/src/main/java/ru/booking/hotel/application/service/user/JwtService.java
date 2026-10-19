@@ -3,6 +3,7 @@ package ru.booking.hotel.application.service.user;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import javax.crypto.SecretKey;
@@ -34,12 +35,12 @@ public class JwtService {
         this.refreshTtlSeconds = refreshTtlSeconds;
     }
 
-    public String generateAccessToken(UUID userId) {
-        return buildToken(userId, accessTtlSeconds, TokenType.ACCESS_TOKEN);
+    public String generateAccessToken(UUID userId, List<String> roles) {
+        return buildToken(userId, accessTtlSeconds, TokenType.ACCESS_TOKEN, roles);
     }
 
     public String generateRefreshToken(UUID userId) {
-        return buildToken(userId, refreshTtlSeconds, TokenType.REFRESH_TOKEN);
+        return buildToken(userId, refreshTtlSeconds, TokenType.REFRESH_TOKEN, List.of());
     }
 
     public long getAccessTtlSeconds() {
@@ -50,7 +51,7 @@ public class JwtService {
         return refreshTtlSeconds;
     }
 
-    private String buildToken(UUID userId, long ttlSeconds, TokenType tokenType) {
+    private String buildToken(UUID userId, long ttlSeconds, TokenType tokenType, List<String> roles) {
         Instant now = Instant.now();
         return Jwts.builder()
                 .subject(userId.toString())
@@ -58,6 +59,7 @@ public class JwtService {
                 .expiration(Date.from(now.plusSeconds(ttlSeconds)))
                 .signWith(key)
                 .claim("type", tokenType.name())
+                .claim("roles", roles)
                 .compact();
     }
 }

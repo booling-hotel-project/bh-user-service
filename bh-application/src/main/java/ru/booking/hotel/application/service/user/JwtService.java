@@ -10,11 +10,12 @@ import javax.crypto.SecretKey;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import ru.booking.hotel.domain.token.TokenType;
+
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
-import ru.booking.hotel.domain.token.TokenType;
 
 @Service
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -33,12 +34,12 @@ public class JwtService {
         this.refreshTtlSeconds = refreshTtlSeconds;
     }
 
-    public String generateAccessToken(UUID userId, TokenType tokenType) {
-        return buildToken(userId, accessTtlSeconds, tokenType);
+    public String generateAccessToken(UUID userId) {
+        return buildToken(userId, accessTtlSeconds, TokenType.ACCESS_TOKEN);
     }
 
-    public String generateRefreshToken(UUID userId, TokenType tokenType) {
-        return buildToken(userId, refreshTtlSeconds, tokenType);
+    public String generateRefreshToken(UUID userId) {
+        return buildToken(userId, refreshTtlSeconds, TokenType.REFRESH_TOKEN);
     }
 
     public long getAccessTtlSeconds() {

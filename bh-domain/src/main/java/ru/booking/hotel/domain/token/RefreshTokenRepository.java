@@ -28,7 +28,7 @@ public class RefreshTokenRepository {
 
     public Optional<RefreshToken> findByTokenHash(String tokenHash) {
         List<RefreshToken> tokens = jdbcTemplate.query(
-                "SELECT id, user_id, token_hash, expires_at FROM refresh_tokens WHERE token_hash = :tokenHash",
+                "SELECT id, user_id, token_hash, token_type, expires_at FROM refresh_tokens WHERE token_hash = :tokenHash",
                 Map.of("tokenHash", tokenHash),
                 new RefreshTokenRowMapper()
         );

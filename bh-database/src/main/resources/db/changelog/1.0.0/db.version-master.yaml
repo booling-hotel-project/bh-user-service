@@ -26,3 +26,6 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: db.20261016-3_insert_admin_user.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261019-1_add_token_type_to_refresh_tokens.yaml

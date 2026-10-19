@@ -12,6 +12,12 @@
 
         <property name="userId"    column="user_id"    not-null="true" type="java.util.UUID"/>
         <property name="tokenHash" column="token_hash" not-null="true"/>
+        <property name="tokenType" column="token_type" not-null="true">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">ru.booking.hotel.domain.token.TokenType</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
         <property name="expiresAt" column="expires_at" not-null="true"
                   type="java.time.OffsetDateTime"/>
     </class>

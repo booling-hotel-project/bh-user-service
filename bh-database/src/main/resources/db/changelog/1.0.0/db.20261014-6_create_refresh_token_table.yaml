@@ -24,9 +24,6 @@ databaseChangeLog:
                     nullable: false
                     unique: true
               - column:
-                  name: token_type
-                  type: string
-              - column:
                    name: expires_at
                    type: timestamp with time zone
                    constraints:

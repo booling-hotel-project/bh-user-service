@@ -81,7 +81,7 @@ public class UserApplicationService {
 
         return new LoginUserResponse()
                 .userId(user.getId())
-                .accessToken(jwtService.generateAccessToken(user.getId(), TokenType.ACCESS_TOKEN))
+                .accessToken(jwtService.generateAccessToken(user.getId()))
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
@@ -108,7 +108,7 @@ public class UserApplicationService {
 
         return new RefreshTokenResponse()
                 .userId(stored.getUserId())
-                .accessToken(jwtService.generateAccessToken(stored.getUserId(), TokenType.ACCESS_TOKEN))
+                .accessToken(jwtService.generateAccessToken(stored.getUserId()))
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
@@ -151,7 +151,7 @@ public class UserApplicationService {
 
         return new RegisterUserResponse()
                 .userId(user.getId())
-                .accessToken(jwtService.generateAccessToken(user.getId(), TokenType.ACCESS_TOKEN))
+                .accessToken(jwtService.generateAccessToken(user.getId()))
                 .refreshToken(rawRefreshToken)
                 .tokenType("Bearer")
                 .expiresIn(jwtService.getAccessTtlSeconds());
@@ -203,10 +203,11 @@ public class UserApplicationService {
     }
 
     private String issueRefreshToken(UUID userId) {
-        String rawRefreshToken = jwtService.generateRefreshToken(userId, TokenType.REFRESH_TOKEN);
+        String rawRefreshToken = jwtService.generateRefreshToken(userId);
         var refreshToken = RefreshToken.builder()
                 .userId(userId)
                 .tokenHash(tokenHasher.sha256Hex(rawRefreshToken))
+                .tokenType(TokenType.REFRESH_TOKEN)
                 .expiresAt(OffsetDateTime.now().plusSeconds(jwtService.getRefreshTtlSeconds()))
                 .build();
 

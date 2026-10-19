@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261019-1_add_token_type_to_refresh_tokens
+      author: Safoev.DZ
+      changes:
+        - addColumn:
+            tableName: refresh_tokens
+            columns:
+              - column:
+                  name: token_type
+                  type: varchar(255)
+                  defaultValue: REFRESH_TOKEN
+                  constraints:
+                    nullable: false

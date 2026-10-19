@@ -29,4 +29,18 @@ public abstract class UserErrorReason extends AbstractErrorReason implements Err
             template("Пользователь с почтой: ${email}, уже существует");
         }
     }
+
+    @Builder
+    public final static class RefreshTokenNotFoundErrorReason extends UserErrorReason {
+        {
+            template("Refresh-токен не найден");
+        }
+    }
+
+    @Builder
+    public final static class RefreshTokenExpiredErrorReason extends UserErrorReason {
+        {
+            template("Срок действия refresh-токена истек");
+        }
+    }
 }

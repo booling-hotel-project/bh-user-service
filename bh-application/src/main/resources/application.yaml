@@ -19,3 +19,10 @@ app:
     secret: change-me-in-production-0123456789abcdef
     access-ttl-seconds: 3600
     refresh-ttl-seconds: 2592000
+server:
+  port: 8081
+
+openapi:
+  base-path: /api
+  user:
+    base-path: ${openapi.base-path}

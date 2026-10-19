@@ -77,7 +77,7 @@
           }
         },
         "responses": {
-          "200": {
+          "201": {
             "description": "Успешная регистрация",
             "content": {
               "application/json": {
@@ -95,6 +95,87 @@
           },
           "409": {
             "$ref": "../common/common-contract.json#/components/responses/ConflictErrorResponse"
+          }
+        }
+      }
+    },
+    "/v1/user/staff": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Создание сотрудника",
+        "description": "Создает аккаунт сотрудника с профилем и ролью персонала. Токены не выдаются, вход через login",
+        "operationId": "createStaff",
+        "requestBody": {
+          "description": "Данные сотрудника и его роль",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "user-request-models.json#/components/schemas/CreateStaffRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Сотрудник создан",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "user-response-models.json#/components/schemas/CreateStaffResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "../common/common-contract.json#/components/responses/ValidationErrorResponse"
+          },
+          "404": {
+            "$ref": "../common/common-contract.json#/components/responses/NotFoundErrorResponse"
+          },
+          "409": {
+            "$ref": "../common/common-contract.json#/components/responses/ConflictErrorResponse"
+          }
+        }
+      }
+    },
+    "/v1/user/auth/refresh": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "summary": "Обновление пары токенов по refresh-токену",
+        "description": "Команда служит для обновления токенов доступа: старый refresh-токен инвалидируется, выдается новая пара",
+        "operationId": "refreshToken",
+        "requestBody": {
+          "description": "Refresh-токен для обновления",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "user-request-models.json#/components/schemas/RefreshTokenRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Токены успешно обновлены",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "user-response-models.json#/components/schemas/RefreshTokenResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "../common/common-contract.json#/components/responses/ValidationErrorResponse"
+          },
+          "401": {
+            "$ref": "../common/common-contract.json#/components/responses/UnauthorizedErrorResponse"
           }
         }
       }

@@ -79,6 +79,54 @@
           "accessToken",
           "refreshToken"
         ]
+      },
+      "CreateStaffResponse": {
+        "type": "object",
+        "description": "Результат создания сотрудника",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор созданного сотрудника"
+          }
+        },
+        "required": [
+          "userId"
+        ]
+      },
+      "RefreshTokenResponse": {
+        "type": "object",
+        "description": "Новая пара токенов после обновления",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "format": "uuid",
+            "description": "Идентификатор пользователя"
+          },
+          "accessToken": {
+            "type": "string",
+            "description": "Новый токен доступа"
+          },
+          "refreshToken": {
+            "type": "string",
+            "description": "Новый токен обновления"
+          },
+          "tokenType": {
+            "type": "string",
+            "description": "Тип токена",
+            "example": "Bearer"
+          },
+          "expiresIn": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Время жизни токена доступа в секундах"
+          }
+        },
+        "required": [
+          "userId",
+          "accessToken",
+          "refreshToken"
+        ]
       }
     }
   }

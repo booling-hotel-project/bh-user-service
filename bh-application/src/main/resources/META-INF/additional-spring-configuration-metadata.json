@@ -1,0 +1,14 @@
+{
+  "properties": [
+    {
+      "name": "openapi.base-path",
+      "type": "java.lang.String",
+      "description": "Относительный путь для контроллеров OpenApi."
+    },
+    {
+      "name": "openapi.user.base-path",
+      "type": "java.lang.String",
+      "description": "Относительный путь для контроллера User."
+    }
+  ]
+}

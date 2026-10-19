@@ -14,4 +14,12 @@ public abstract class RoleErrorReason extends AbstractErrorReason implements Err
             template("Роль с именем: ${roleName}, не найдена");
         }
     }
+
+    @Builder
+    public final static class RoleNotAllowedErrorReason extends RoleErrorReason {
+        public String roleName;
+        {
+            template("Роль ${roleName} нельзя назначить через создание сотрудника");
+        }
+    }
 }

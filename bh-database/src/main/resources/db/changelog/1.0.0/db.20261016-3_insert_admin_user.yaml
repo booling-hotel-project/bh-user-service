@@ -1,0 +1,47 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261016-3_insert_admin_user
+      author: Safoev.DZ
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  value: "660e8400-e29b-41d4-a716-446655440001"
+              - column:
+                  name: email
+                  value: "admin@booking.hotel"
+              - column:
+                  name: phone
+                  value: "+70000000001"
+              - column:
+                  name: password_hash
+                  value: "$2a$10$BDOYk3R2zWN.ThcF17Qpnu/LlVWqdPb5RmU7I5LZJhAZWFULYqwGm"
+              - column:
+                  name: name
+                  value: "Администратор"
+        - insert:
+            tableName: user_roles
+            columns:
+              - column:
+                  name: id
+                  value: "660e8400-e29b-41d4-a716-446655440002"
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440001"
+              - column:
+                  name: role_id
+                  value: "550e8400-e29b-41d4-a716-446655440005"
+        - insert:
+            tableName: staff_profiles
+            columns:
+              - column:
+                  name: user_id
+                  value: "660e8400-e29b-41d4-a716-446655440001"
+              - column:
+                  name: department
+                  value: "Администрация"
+              - column:
+                  name: position
+                  value: "Администратор"

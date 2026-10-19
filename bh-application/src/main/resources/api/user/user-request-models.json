@@ -59,6 +59,67 @@
         "required": [
           "password","email","phone"
         ]
+      },
+      "RefreshTokenRequest": {
+        "type": "object",
+        "description": "Запрос обновления пары токенов",
+        "properties": {
+          "refreshToken": {
+            "type": "string",
+            "description": "Действующий refresh-токен"
+          }
+        },
+        "required": [
+          "refreshToken"
+        ]
+      },
+      "CreateStaffRequest": {
+        "type": "object",
+        "description": "Создание сотрудника: аккаунт + профиль + роль персонала",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email сотрудника"
+          },
+          "phone": {
+            "type": "string",
+            "description": "Телефон сотрудника"
+          },
+          "password": {
+            "type": "string",
+            "format": "password",
+            "description": "Пароль, минимум 8 символов",
+            "minLength": 8
+          },
+          "name": {
+            "type": "string",
+            "description": "ФИО сотрудника"
+          },
+          "role": {
+            "type": "string",
+            "description": "Роль персонала: MANAGER, HOUSEKEEPING, MAINTENANCE или ADMIN",
+            "enum": [
+              "MANAGER",
+              "HOUSEKEEPING",
+              "MAINTENANCE",
+              "ADMIN"
+            ]
+          },
+          "department": {
+            "type": "string",
+            "description": "Отдел"
+          },
+          "position": {
+            "type": "string",
+            "description": "Должность"
+          }
+        },
+        "required": [
+          "password",
+          "email",
+          "role"
+        ]
       }
     }
   }

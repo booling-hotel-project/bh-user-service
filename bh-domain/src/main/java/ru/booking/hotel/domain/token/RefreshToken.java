@@ -17,6 +17,7 @@ public class RefreshToken {
     UUID id;
     UUID userId;
     String tokenHash;
+    TokenType tokenType;
     OffsetDateTime expiresAt;
 
 }

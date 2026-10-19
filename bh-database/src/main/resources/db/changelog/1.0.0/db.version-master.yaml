@@ -20,3 +20,9 @@ databaseChangeLog:
   - include:
       relativeToChangelogFile: true
       file: db.20261016-1_insert_roles_table.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261016-2_insert_admin_role.yaml
+  - include:
+      relativeToChangelogFile: true
+      file: db.20261016-3_insert_admin_user.yaml

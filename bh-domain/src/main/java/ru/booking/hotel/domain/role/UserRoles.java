@@ -4,7 +4,8 @@ public enum UserRoles {
     USER("Обычный пользователь"),
     MANAGER("Менеджер"),
     HOUSEKEEPING("Персонал уборки (горничные)"),
-    MAINTENANCE("Персонал обслуживания (ремонт)");
+    MAINTENANCE("Персонал обслуживания (ремонт)"),
+    ADMIN("Администратор");
 
     private final String description;
 

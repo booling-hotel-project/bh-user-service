@@ -12,13 +12,17 @@ import org.springframework.stereotype.Service;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
+import ru.booking.hotel.domain.token.TokenType;
 
 @Service
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class JwtService {
 
-    private final SecretKey key;
-    private final long accessTtlSeconds;
-    private final long refreshTtlSeconds;
+    SecretKey key;
+    long accessTtlSeconds;
+    long refreshTtlSeconds;
 
     public JwtService(
             @Value("${app.jwt.secret}") String secret,
@@ -29,12 +33,12 @@ public class JwtService {
         this.refreshTtlSeconds = refreshTtlSeconds;
     }
 
-    public String generateAccessToken(UUID userId) {
-        return buildToken(userId, accessTtlSeconds);
+    public String generateAccessToken(UUID userId, TokenType tokenType) {
+        return buildToken(userId, accessTtlSeconds, tokenType);
     }
 
-    public String generateRefreshToken(UUID userId) {
-        return buildToken(userId, refreshTtlSeconds);
+    public String generateRefreshToken(UUID userId, TokenType tokenType) {
+        return buildToken(userId, refreshTtlSeconds, tokenType);
     }
 
     public long getAccessTtlSeconds() {
@@ -45,13 +49,14 @@ public class JwtService {
         return refreshTtlSeconds;
     }
 
-    private String buildToken(UUID userId, long ttlSeconds) {
+    private String buildToken(UUID userId, long ttlSeconds, TokenType tokenType) {
         Instant now = Instant.now();
         return Jwts.builder()
                 .subject(userId.toString())
                 .issuedAt(Date.from(now))
                 .expiration(Date.from(now.plusSeconds(ttlSeconds)))
                 .signWith(key)
+                .claim("type", tokenType.name())
                 .compact();
     }
 }

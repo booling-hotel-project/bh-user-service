@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import ru.booking.hotel.application.api.user.model.ApiError;
 import ru.booking.hotel.application.api.user.model.FieldViolation;
@@ -37,6 +38,15 @@ public class RequestExceptionHandler {
     public ResponseEntity<ApiError> handleBusiness(BusinessException ex) {
         log.warn("Бизнес-ошибка: {}", ex.getMessage());
         return status(HttpStatus.CONFLICT, ex);
+    }
+
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ApiError> handleNoResource(NoResourceFoundException ex) {
+        log.warn("Путь не найден: {}", ex.getResourcePath());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(new ApiError()
+                        .code("NOT_FOUND")
+                        .message("Запрашиваемый путь не найден"));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

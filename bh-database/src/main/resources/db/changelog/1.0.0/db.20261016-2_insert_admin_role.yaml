@@ -1,0 +1,17 @@
+databaseChangeLog:
+  - changeSet:
+      id: 20261016-2_insert_admin_role
+      author: Safoev.DZ
+      changes:
+        - insert:
+            tableName: roles
+            columns:
+              - column:
+                  name: id
+                  value: "550e8400-e29b-41d4-a716-446655440005"
+              - column:
+                  name: name
+                  value: "ADMIN"
+              - column:
+                  name: description
+                  value: "Администратор системы"

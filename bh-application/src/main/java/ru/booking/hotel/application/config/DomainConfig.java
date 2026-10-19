@@ -10,6 +10,7 @@ import ru.booking.hotel.domain.role.RoleRepository;
 import ru.booking.hotel.domain.role.UserRoleRepository;
 import ru.booking.hotel.domain.token.RefreshTokenRepository;
 import ru.booking.hotel.domain.user.GuestProfileRepository;
+import ru.booking.hotel.domain.user.StaffProfileRepository;
 import ru.booking.hotel.domain.user.UserRepository;
 
 import jakarta.persistence.EntityManager;
@@ -28,8 +29,14 @@ public class DomainConfig {
     }
 
     @Bean
-    public RefreshTokenRepository refreshTokenRepository(EntityManager entityManager) {
-        return new RefreshTokenRepository(entityManager);
+    public StaffProfileRepository staffProfileRepository(EntityManager entityManager) {
+        return new StaffProfileRepository(entityManager);
+    }
+
+    @Bean
+    public RefreshTokenRepository refreshTokenRepository(
+            EntityManager entityManager, NamedParameterJdbcTemplate jdbcTemplate) {
+        return new RefreshTokenRepository(entityManager, jdbcTemplate);
     }
 
     @Bean
